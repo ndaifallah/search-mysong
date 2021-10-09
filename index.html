@@ -7,15 +7,59 @@
     <link href="primer.css" rel="stylesheet"/>
     <script src="scripts/facebook.js"></script>
     <title>GMC Song searcher</title>
+    <style>
+      .search-button-container{
+        width: 100%;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .song {
+        width: 100%;
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      .pic{
+        height: 70px;
+        width: 70px;
+        background-color: grey;
+        border-radius: 10px;
+        margin-right: 10px;
+      }
+
+      .description {
+        padding: 3px;
+      }
+    </style>
 </head>
 <body style="margin: 40px 40px;">
     <div >
         <h1>GMC Song searcher</h1>
         <!-- Mes inputs -->
+        <form>
+          <input class="form-control input-block" type="text" placeholder="Ex: Hello" aria-label="Full-width input" />
+          <div class="search-button-container">
+            <button class="btn btn-primary" type="button">Search</button>
+          </div>
+        </form>
         
         <h2>Mes postes</h2>
         <!-- un petit exemple pour mes postes -->
         <div id="all-my-songs">
+          <div class="song">
+            <div class="pic"></div>
+            <div class="description">
+              <p><b>
+                Ma chanson
+              </b></p>
+              <p>
+                L'auteur de la chanson
+              </p>
+            </div>
+          </div>
             
         </div>
 </body>
