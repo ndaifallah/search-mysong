@@ -63,9 +63,20 @@
       let myInput = document.querySelector('input');
       let myUrl = `https://itunes.apple.com/search?term=${myInput.value}`;
 
-      let resp = await fetch(myUrl);
+      fetchSongs(myUrl);
+
+      
+    }
+
+    async function fetchSongs(url){
+      let resp = await fetch(url);
       let data = await resp.json();
 
+      renderElements(data);
+      
+    }
+
+    function renderElements(data){
       let songsList = "";
       // Render the whole thing,
       data.results.map(el => {
@@ -84,10 +95,7 @@
         songsList += myComponent;
       });
       document.querySelector('#all-my-songs').innerHTML = songsList;
-
-      
     }
-
 
 </script>
 </html>
