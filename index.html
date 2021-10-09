@@ -28,6 +28,8 @@
         background-color: grey;
         border-radius: 10px;
         margin-right: 10px;
+        display: block;
+        overflow: hidden;
       }
 
       .description {
@@ -42,31 +44,49 @@
         <form>
           <input class="form-control input-block" type="text" placeholder="Ex: Hello" aria-label="Full-width input" />
           <div class="search-button-container">
-            <button class="btn btn-primary" type="button">Search</button>
+            <button class="btn btn-primary" type="button" onClick="searchSongs()">Search</button>
           </div>
         </form>
         
         <h2>Mes postes</h2>
         <!-- un petit exemple pour mes postes -->
         <div id="all-my-songs">
-          <div class="song">
-            <div class="pic"></div>
-            <div class="description">
-              <p><b>
-                Ma chanson
-              </b></p>
-              <p>
-                L'auteur de la chanson
-              </p>
-            </div>
-          </div>
+          
             
         </div>
 </body>
 
 <script>
     // Here goes the code
+    
+    async function searchSongs() {
+      let myInput = document.querySelector('input');
+      let myUrl = `https://itunes.apple.com/search?term=${myInput.value}`;
 
+      let resp = await fetch(myUrl);
+      let data = await resp.json();
+
+      let songsList = "";
+      // Render the whole thing,
+      data.results.map(el => {
+        let myComponent = `<div class="song">
+            <div class="pic"><img src="${el.artworkUrl100}"/></div>
+            <div class="description">
+              <p><b><a href="${el.trackViewUrl}" target="_blank">
+                ${el.trackName}
+              </b></a></p>
+              <p>
+                ${el.artistName}
+              </p>
+            </div>
+          </div>`;
+
+        songsList += myComponent;
+      });
+      document.querySelector('#all-my-songs').innerHTML = songsList;
+
+      
+    }
 
 
 </script>
