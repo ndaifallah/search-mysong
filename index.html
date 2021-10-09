@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="primer.css" rel="stylesheet"/>
+    <script src="scripts/facebook.js"></script>
+    <title>My FB</title>
+</head>
+<body style="margin: 40px 40px;">
+    <div >
+        <h1>GMC FB</h1>
+        <!-- Mes inputs -->
+        <form>
+            <div class="form-group">
+                <div class="form-group-header">
+                  <label for="example-textarea">Example Textarea</label>
+                </div>
+                <div class="form-group-body">
+                  <textarea class="form-control" id="mon-poste"></textarea>
+                </div>
+                <div class="form-actions" style="margin-top: 20px;">
+                    <button id="post-me" type="button" class="btn btn-primary">Post</button>
+                    
+                  </div>
+              </div>
+            </div>
+        </form>
+        <h2>Mes postes</h2>
+        <!-- un petit exemple pour mes postes -->
+        <div id="all-my-posts">
+            
+        </div>
+</body>
+
+<script>
+    // My code here
+    const auteur = "Nasro"; // Mon nom, 
+    var publications = []; // Les publications a afficher sur mon fil d'actualités
+
+    // Récupérer le bouton post afin de lui mettre un CALLBACK
+    /**
+     * CALLBACK c'est une fonction a définir pour répondre à un event (click, push button ....)
+     */
+    let post_button = document.querySelector("#post-me");
+    post_button.onclick = publish;
+    
+    // Définition du callback
+    function publish(){
+      console.log("Yay clickd");
+      let mon_poste = document.querySelector("#mon-poste"); //Récupération du contenu du text area
+      let pub = new Publication(auteur, mon_poste.value);
+      // Ajouter ma publication actuelle au ensemble des publications.
+      publications.push(pub);
+
+      // Show le contenu d'un seul element (proprieté content de l'objet Publication)
+      // function showElement(el){
+      //   console.log(el.content);
+      // }
+
+      // publications.map(showElement);
+
+      // Afficher le tous
+      // console.log(publications);
+      // Déclarer le HTML a mettre pour les publications
+      let myPosts = "";
+      
+      publications.map(function (el){
+        // Déclaration des variables qu'on va utiliser dans le template
+        let auteur = el.auteur;
+        let content = el.content;
+        // Ajouter chaque element à son composant, en  utilisant un template
+        let postComponent = `<div class="TimelineItem">
+                      <div class="TimelineItem-badge">
+                        <svg class="octicon octicon-flame" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M5.05.31c.81 2.17.41 3.38-.52 4.31C3.55 5.67 1.98 6.45.9 7.98c-1.45 2.05-1.7 6.53 3.53 7.7-2.2-1.16-2.67-4.52-.3-6.61-.61 2.03.53 3.33 1.94 2.86 1.39-.47 2.3.53 2.27 1.67-.02.78-.31 1.44-1.13 1.81 3.42-.59 4.78-3.42 4.78-5.56 0-2.84-2.53-3.22-1.25-5.61-1.52.13-2.03 1.13-1.89 2.75.09 1.08-1.02 1.8-1.86 1.33-.67-.41-.66-1.19-.06-1.78C8.18 5.31 8.68 2.45 5.05.32L5.03.3l.02.01z"></path></svg>
+                      </div>
+                    
+                      <div class="TimelineItem-body">
+                        <a href="#" class="text-bold Link--primary mr-1">${auteur}</a> a écrit
+                        <a href="#" class="text-bold Link--primary">${content}</a>
+                        <a href="#" class="Link--secondary">Like</a>
+                      </div>
+                    </div>`;
+        // Ajouter le composent HTML aux avec les autres publications (HTML)
+        myPosts = myPosts + postComponent;
+      });
+  
+      // Ajouter les composants des posts sur la page à l'endroit all-my-posts
+      document.querySelector("#all-my-posts").innerHTML = myPosts;
+    }
+
+    let some_array = [1,2,3];
+    // Faites la somme des elements de ce tableau en utilisant map
+    // First step: Définir la fonction du traitement d'un seul élément,
+    function getOneElement(el){
+      console.log(el + 3);
+    }
+
+    some_array.map(getOneElement);
+
+
+
+
+</script>
+</html>
